@@ -40,7 +40,7 @@ class Hangman:
     ask_letter()
         Asks the user for a letter.
     '''
-    def __init__(self, word_list, num_lives=5):
+    def __init__(self, word_list, num_lives=5, word, word_guessed, num_letters, list_letters):
         # TODO 2: Initialize the attributes as indicated in the docstring
         # TODO 2: Print two message upon initialization:
         # 1. "The mystery word has {len(self.word)} characters" (The number of letters is NOT the UNIQUE number of letters)
@@ -73,6 +73,16 @@ class Hangman:
         2. If the character is a single character
         If it passes both checks, it calls the check_letter method.
         '''
+        
+        while True:
+            letter = input("Pick a letter ")
+            if len(letter) > 1:
+            print("Please, enter just one character")
+            elif letter in list_letters:
+                print (letter + " was already tried")
+             else:
+                check_letter()
+        
         # TODO 1: Ask the user for a letter iteratively until the user enters a valid letter
         # TODO 1: Assign the letter to a variable called `letter`
         # TODO 1: The letter has to comply with the following criteria: It has to be a single character. If it is not, print "Please, enter just one character"
