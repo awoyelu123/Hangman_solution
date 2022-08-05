@@ -132,7 +132,7 @@ def play_game(word_list):
 
     while True:
         if game.num_lives == 0:
-            print(f"You ran out of lives. The word was {game.word}")
+            print(f"You ran out of lives. The word was {game.word}!")
             break
         elif game.num_letters > 0:
             game.ask_letter()
