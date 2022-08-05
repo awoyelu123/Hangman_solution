@@ -67,20 +67,20 @@ class Hangman:
     def check_letter(self, letter):
         if letter in self.word.lower():
             if self.word.count(letter) > 1:
-                idx = 0
+                index = 0
                 for i in range(self.word.count(letter)):
-                    idx = self.word.index(letter, idx)
-                    self.word_guessed[idx] = letter
-                    idx += 1
-            idx = self.word.lower().index(letter)
-            self.word_guessed[idx] = letter
+                    index = self.word.index(letter, index)
+                    self.word_guessed[index] = letter
+                    index += 1
+            index = self.word.lower().index(letter)
+            self.word_guessed[index] = letter
             self.num_letters -= 1
             print(f'{letter} is in the word!')
             print(self.word_guessed)
 
         else:
             self.num_lives -= 1
-            print(f'Sorry, {letter} is not in the word.')
+            print(f'{letter} is not in the word.')
             print(f'You have {self.num_lives} lives left.')
 
         self.list_letters.append(letter)
