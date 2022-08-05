@@ -40,7 +40,6 @@ class Hangman:
     ask_letter()
         Asks the user for a letter.
     '''
-
     def __init__(self, word_list, num_lives=5):
         # TODO 2: Initialize the attributes as indicated in the docstring
         # TODO 2: Print two message upon initialization:
@@ -59,21 +58,33 @@ class Hangman:
         pass
 
 
+        # TODO 2: Initialize the attributes as indicated in the docstring
+        # TODO 2: Print two message upon initialization:
+        # 1. "The mystery word has {len(self.word)} characters" (The number of letters is NOT the UNIQUE number of letters)
+        # 2. {word_guessed}
+
+
     def check_letter(self, letter):
-        if letter in self.word:
-            print("The letter is in the word.")
-            for index, character in enumerate(self.word):
-                self.word_guessed[index] = letter
-                print (self.word_guessed)
-                break
+        if letter in self.word.lower():
+            if self.word.count(letter) > 1:
+                idx = 0
+                for i in range(self.word.count(letter)):
+                    idx = self.word.index(letter, idx)
+                    self.word_guessed[idx] = letter
+                    idx += 1
+            idx = self.word.lower().index(letter)
+            self.word_guessed[idx] = letter
             self.num_letters -= 1
+            print(f'{letter} is in the word!')
+            print(self.word_guessed)
+
         else:
-            print("The letter is not in the word.")
             self.num_lives -= 1
-            print (f"You have {self.num_lives} lives left.")
+            print(f'Sorry, {letter} is not in the word.')
+            print(f'You have {self.num_lives} lives left.')
+
         self.list_letters.append(letter)
 
-        
 
         '''
         Checks if the letter is in the word.
@@ -86,21 +97,15 @@ class Hangman:
             The letter to be checked
 
         '''
-
-
         # TODO 3: Check if the letter is in the word. TIP: You can use the lower() method to convert the letter to lowercase
         # TODO 3: If the letter is in the word, replace the '_' in the word_guessed list with the letter
         # TODO 3: If the letter is in the word, the number of UNIQUE letters in the word that have not been guessed yet has to be reduced by 1
         # TODO 3: If the letter is not in the word, reduce the number of lives by 1
         # Be careful! A word can contain the same letter more than once. TIP: Take a look at the index() method in the string class
+        pass
 
     def ask_letter(self):
-        '''
-        Asks the user for a letter and checks two things:
-        1. If the letter has already been tried
-        2. If the character is a single character
-        If it passes both checks, it calls the check_letter method.
-        '''
+
         while True:
             letter = input("Pick a letter ")
             if len(letter) > 1:
@@ -110,15 +115,15 @@ class Hangman:
             else:
                 self.check_letter(letter)
                 break
-    
-"""
-#  1: Ask the user for a letter iteratively until the user enters a valid letter
-#  1: Assign the letter to a variable called `letter`
-#  1: The letter has to comply with the following criteria: It has to be a single character. If it is not, print "Please, enter just one character"
-#  2. It has to be a letter that has not been tried yet. Use the list_letters attribute to check this. If it has been tried, print "{letter} was already tried".
-#  3: If the letter is valid, call the check_letter method
-"""
-pass
+            
+    """
+    #  1: Ask the user for a letter iteratively until the user enters a valid letter
+    #  1: Assign the letter to a variable called `letter`
+    #  1: The letter has to comply with the following criteria: It has to be a single character. If it is not, print "Please, enter just one character"
+    #  2. It has to be a letter that has not been tried yet. Use the list_letters attribute to check this. If it has been tried, print "{letter} was already tried".
+    #  3: If the letter is valid, call the check_letter method
+    """
+    pass
 
 
 def play_game(word_list):
@@ -134,6 +139,8 @@ def play_game(word_list):
         else:
             print ("Congratulations, you won!")
             break
+        
+            
 
             
     
@@ -144,5 +151,4 @@ def play_game(word_list):
 if __name__ == '__main__':
     word_list = ['apple', 'banana', 'orange', 'pear', 'strawberry', 'watermelon']
     play_game(word_list)
-
 # %%
